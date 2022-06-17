@@ -9,13 +9,34 @@ function phnInputCount(product, price, isIncrease){
         productQuantity = parseFloat(productInput) - 1; 
     }
     productInputText.value = productQuantity
-    
+
     // update Product Total
     const productTotal = document.getElementById(product+'-price')
     productTotal.innerText = productQuantity * price
-    console.log(price);
+    // update total price
+    totalPrice();
+    
 }
 
+// Total price calculation 
+function getInputValue(product){
+    const productInput = document.getElementById(product+'-input')
+    const productNum = parseFloat(productInput.value)
+    return productNum;
+}
+function totalPrice(){
+    const phnTotal = getInputValue('phone') * 1219
+    const caseTotal = getInputValue('case') * 59
+    const subTotal = phnTotal + caseTotal
+    const tax = subTotal / 10;
+    const total = subTotal- tax
+    // update sub-total
+    document.getElementById('sub-total').innerText= subTotal
+    document.getElementById('tax-amount').innerText = tax
+    document.getElementById('total-price').innerText = total
+
+    console.log(total);
+}
 
 // phone & case quantity increasing
 document.getElementById('phone-plus').addEventListener('click', function(){
